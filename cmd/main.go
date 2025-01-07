@@ -1,11 +1,14 @@
 package main
 
 import (
+	"context"
 	"os"
+	"os/signal"
 	todo "rest-api-todo"
 	"rest-api-todo/pkg/handler"
 	"rest-api-todo/pkg/repository"
 	"rest-api-todo/pkg/service"
+	"syscall"
 
 	_ "github.com/lib/pq"
 	"github.com/sirupsen/logrus"
@@ -44,8 +47,27 @@ func main() {
 	handlers := handler.New(services)
 
 	srv := todo.New()
-	if err := srv.Run(viper.GetString("port"), handlers.InitRoutes()); err != nil {
-		logrus.Fatalf("Error starting server: %v", err)
+
+	go func() {
+		if err := srv.Run(viper.GetString("port"), handlers.InitRoutes()); err != nil {
+			logrus.Fatalf("Error starting server: %v", err)
+		}
+	}()
+
+	logrus.Print("TodoApp started")
+
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGTERM, syscall.SIGINT)
+	<-quit
+
+	logrus.Print("TodoApp shutting down")
+
+	if err := srv.Shutdown(context.Background()); err != nil {
+		logrus.Printf("Error shutting down server: %s", err.Error())
+	}
+
+	if err := db.Close(); err != nil {
+		logrus.Printf("Error closing database connection: %s", err.Error())
 	}
 }
 
