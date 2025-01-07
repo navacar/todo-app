@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  todo-app:
+    build: ./
+    command: ./wait-for-postgres.sh db ./todo-app
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    environment:
+      - DB_PASSWORD=qwerty
+    
+  db:
+    restart: always
+    image: postgres:17.2
+    volumes:
+    - ./.database/postgres/data:/var/lib/postgresql/data
+    - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRES_PASSWORD=qwerty
+    ports:
+      - 5432:5432
