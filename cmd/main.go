@@ -45,7 +45,7 @@ func main() {
 
 	srv := todo.New()
 	if err := srv.Run(viper.GetString("port"), handlers.InitRoutes()); err != nil {
-		logrus.Fatalf("Error starting server: %w", err)
+		logrus.Fatalf("Error starting server: %v", err)
 	}
 }
 
