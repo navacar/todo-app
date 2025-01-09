@@ -1,54 +1,54 @@
 # 📋 Todo-App
 
-Это простое приложение для управления списками задач.
+This is a simple task management application.
 
-## 🚀 **Аутентификация**
+## 🚀 **Authentication**
 
-Для работы с приложением сначала необходимо зарегистрироваться и авторизоваться.
+To work with the application, you first need to register and log in.
 
-### 📌 **Регистрация пользователя (Sign-Up)**  
+### 📌 **User Registration (Sign-Up)**  
 **POST:** `/v1/auth/sign-up`  
 
-### 📌 **Авторизация пользователя (Sign-In)**  
+### 📌 **User Login (Sign-In)**  
 **POST:** `/v1/auth/sign-in`  
 
-**После успешного входа в систему вы получите JWT-токен**, который необходимо использовать для работы с API списков.
+**After successfully logging in, you will receive a JWT token**, which must be used to work with the lists API.
 
 ---
 
-## 🗑️ **CRUD для работы со списками (Lists)**
+## 🗑️ **CRUD Operations for Lists**
 
-### 📌 **Получить все списки**  
+### 📌 **Get All Lists**  
 **GET:** `/v1/api/lists`
 
-### 📌 **Получить список по ID**  
+### 📌 **Get List by ID**  
 **GET:** `/v1/api/lists/{id}`
 
-### 📌 **Удалить список по ID**  
+### 📌 **Delete List by ID**  
 **DELETE:** `/v1/api/lists/{id}`
 
-### 📌 **Обновить список по ID**  
+### 📌 **Update List by ID**  
 **PUT:** `/v1/api/lists/{id}`
 
 ---
 
-## 💂️‍♂️ **Работа с элементами в списках (Items)**
+## 💂‍♂️ **Working with Items in Lists**
 
-### 📌 **Создать новый элемент в списке**  
+### 📌 **Create a New Item in a List**  
 **POST:** `/v1/api/lists/{id}/items`  
-Создает новый элемент в списке с идентификатором `{id}`.
+Creates a new item in the list with the identifier `{id}`.
 
-### 📌 **Получить элементы списка**  
+### 📌 **Get Items from a List**  
 **GET:** `/v1/api/lists/{id}/items`  
-Возвращает все элементы списка с идентификатором `{id}`.
+Returns all items from the list with the identifier `{id}`.
 
-### 📌 **Получить элемент по ID**  
+### 📌 **Get Item by ID**  
 **GET:** `/v1/api/items/{id}`
 
-### 📌 **Удалить элемент по ID**  
+### 📌 **Delete Item by ID**  
 **DELETE:** `/v1/api/items/{id}`
 
-### 📌 **Обновить элемент по ID**  
+### 📌 **Update Item by ID**  
 **PUT:** `/v1/api/items/{id}`
 
 ---
